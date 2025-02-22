@@ -51,20 +51,6 @@
               "type": "number",
               "required": true,
               "default": "100"
-            },
-            {
-              "label": "Sensitivity Level",
-              "type": "dropdown",
-              "required": false,
-              "default": "Medium",
-              "options": ["High", "Medium", "Low"]
-            },
-            {
-              "label": "Alert Recipients",
-              "type": "multi-checkbox",
-              "required": true,
-              "default": "Admin",
-              "options": ["Super-Admin", "Admin", "Developer", "Database Analyst"]
             }
           ],
 		"target_url": "https://system-integration.telex.im/format-message (this)",

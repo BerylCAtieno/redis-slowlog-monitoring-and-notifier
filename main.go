@@ -1,33 +1,31 @@
 package main
 
 import (
-	"context"
-	"fmt"
 	"log"
+	"net/http"
+	"os"
 
-	"github.com/go-redis/redis/v8"
-	"github.com/BerylCAtieno/redis-slowlog-monitor/monitor" // Import your package
+	"github.com/BerylCAtieno/redis-slowlog-monitor/api"
+	"github.com/joho/godotenv"
 )
 
+func init() {
+    // Load .env file from current directory
+    if err := godotenv.Load(); err != nil {
+        log.Printf("Warning: No .env file found: %v", err)
+    }
+}
+
+
 func main() {
-	ctx := context.Background()
-
-	// Connect to the local Redis server
-	client := redis.NewClient(&redis.Options{
-		Addr: "localhost:6379", // Default Redis address
-	})
-
-	// Test fetching slow logs
-	slowLogs := monitor.FetchSlowLogs(ctx, client)
-	if slowLogs == nil {
-		log.Println("No slow logs found or an error occurred.")
-		return
+	http.HandleFunc("/integration.json", api.HandleIntegrationConfig)
+	http.HandleFunc("/format-alert", api.HandleIncomingMessage)
+	
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
 	}
-
-	// Print slow logs
-	fmt.Println("Fetched slow logs:")
-	for _, logEntry := range slowLogs {
-		fmt.Printf("ID: %v | Timestamp: %v | Duration: %v μs | Command: %v\n",
-			logEntry[0], logEntry[1], logEntry[2], logEntry[3])
-	}
+	
+	log.Printf("Server running on port %s", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }

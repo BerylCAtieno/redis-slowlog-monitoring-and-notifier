@@ -1,0 +1,56 @@
+# Binaries
+/bin/
+/pkg/
+/out/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Build artifacts
+*.a
+*.o
+
+# Vendor directory (if using Go modules, it's optional)
+vendor/
+
+# Dependencies (if using dep)
+Gopkg.lock
+Gopkg.toml
+
+# Go workspace-specific files
+go.work
+go.work.sum
+
+# IDE/editor settings
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs and temporary files
+*.log
+*.tmp
+*.cache
+
+# Coverage files
+coverage.out
+*.coverprofile
+
+# Generated files
+gen/
+
+# Go test binaries
+_test/
+
+# Docker-related
+docker-compose.override.yml
+
+
+# Environment variables
+.env
+
+# project idx env
+.idx/
+
+tmp/

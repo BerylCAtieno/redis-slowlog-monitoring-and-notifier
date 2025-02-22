@@ -1,6 +1,0 @@
-{
-    "event_name": "alert_message_sent",
-    "message": "SlowLog detected!!",
-    "status": "success",
-    "username": "redis-slowlog-alert-bot"
-  }

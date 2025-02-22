@@ -1,0 +1,74 @@
+{
+	"data": {
+		"author": "Beryl Atieno",
+		"date": {
+			"created_at": "2025-02-22",
+			"updated_at": "2025-02-22"
+		},
+		"descriptions": {
+			"app_description": "A monitoring tool that detects Redis slow queries and notifies administrators in real time.",
+			"app_logo": "https://i.imgur.com/7JQ7JEX.png",
+			"app_name": "Redis SlowLog Monitor",
+			"app_url": "https://txtformat.com/ (this)", 
+			"background_color": "#ffffff"
+		},
+		"integration_category": "Performance Monitoring",
+		"integration_type": "modifier",
+		"is_active": true,
+        "output": [
+            {
+              "label": "dashboard_alerts",
+              "value": true
+            }
+          ],
+		"key_features": [
+			"Real-time detection of Redis slow queries.",
+            "Customizable alert settings for different sensitivity levels.",
+            "Integration with Telex message channels.",
+            "Detailed information for each slowlog."
+		],
+		"permissions": {
+            "monitoring_user": {
+              "always_online": true,
+              "display_name": "Redis SlowLog Monitoring Bot"
+            }
+          },
+          "settings": [
+            {
+              "label": "Query Check Interval",
+              "type": "text",
+              "required": true,
+              "default": "0 * * * *"
+            },
+            {
+              "label": "Enable Notifications",
+              "type": "checkbox",
+              "required": true,
+              "default": "Yes"
+            },
+            {
+              "label": "Slow Query Threshold (ms)",
+              "type": "number",
+              "required": true,
+              "default": "100"
+            },
+            {
+              "label": "Sensitivity Level",
+              "type": "dropdown",
+              "required": false,
+              "default": "Medium",
+              "options": ["High", "Medium", "Low"]
+            },
+            {
+              "label": "Alert Recipients",
+              "type": "multi-checkbox",
+              "required": true,
+              "default": "Admin",
+              "options": ["Super-Admin", "Admin", "Developer", "Database Analyst"]
+            }
+          ],
+		"target_url": "https://system-integration.telex.im/format-message (this)",
+		"tick_url": "https://system-integration.telex.im/format-message (this)",
+		"website": "https://telex.im"
+	}
+}

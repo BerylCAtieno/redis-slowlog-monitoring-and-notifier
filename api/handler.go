@@ -79,7 +79,7 @@ func HandleIncomingMessage(w http.ResponseWriter, r *http.Request) {
 func GetIntegrationConfig() models.IntegrationConfig {
     baseURL := os.Getenv("BASE_URL")
     if baseURL == "" {
-        baseURL = "https://system-integration.telex.im"
+        baseURL = "https://redis-monitoring-telex-integration.onrender.com"
     }
 
     return models.IntegrationConfig{
@@ -133,7 +133,7 @@ func GetIntegrationConfig() models.IntegrationConfig {
                 AppDescription:  "A monitoring tool that detects Redis slow queries and notifies administrators in real time.",
                 AppLogo:        "https://i.imgur.com/7JQ7JEX.png",
                 AppName:        "Redis SlowLog Monitor",
-                AppURL:         "https://txtformat.com/",
+                AppURL:         "https://redis-monitoring-telex-integration.onrender.com",
                 BackgroundColor: "#ffffff",
             },
             IntegrationCategory: "Performance Monitoring",

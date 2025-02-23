@@ -66,10 +66,6 @@ type IntegrationConfig struct {
         IntegrationCategory string `json:"integration_category"`
         IntegrationType    string `json:"integration_type"`
         IsActive          bool   `json:"is_active"`
-        Output            []struct {
-            Label string `json:"label"`
-            Value bool   `json:"value"`
-        } `json:"output"`
         KeyFeatures []string `json:"key_features"`
         Permissions struct {
             MonitoringUser struct {

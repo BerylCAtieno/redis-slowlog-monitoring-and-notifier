@@ -10,10 +10,10 @@ import (
 
 func FetchSlowLogs(ctx context.Context, client *redis.Client) [][]interface{} {
 	slowLogs, err := client.Do(ctx, "SLOWLOG", "GET", 10).Result()
-	if err != nil {
-		log.Println("Failed to fetch slow logs:", err)
-		return nil
-	}
+    if err != nil {
+        log.Println("Failed to fetch slow logs:", err)
+        return nil
+    }
 
 	var rows [][]interface{}
 	if logs, ok := slowLogs.([]interface{}); ok {

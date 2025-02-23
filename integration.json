@@ -9,7 +9,7 @@
 			"app_description": "A monitoring tool that detects Redis slow queries and notifies administrators in real time.",
 			"app_logo": "https://i.imgur.com/7JQ7JEX.png",
 			"app_name": "Redis SlowLog Monitor",
-			"app_url": "https://txtformat.com/ (this)", 
+			"app_url": "https://redis-monitoring-telex-integration.onrender.com", 
 			"background_color": "#ffffff"
 		},
 		"integration_category": "Performance Monitoring",
@@ -53,8 +53,8 @@
               "default": "100"
             }
           ],
-		"target_url": "https://system-integration.telex.im/format-message (this)",
-		"tick_url": "https://system-integration.telex.im/format-message (this)",
+		"target_url": "https://redis-monitoring-telex-integration.onrender.com/send-alert",
+		"tick_url": "https://redis-monitoring-telex-integration.onrender.com/send-alert",
 		"website": "https://telex.im"
 	}
 }

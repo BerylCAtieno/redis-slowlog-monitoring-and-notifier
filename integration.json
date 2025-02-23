@@ -54,6 +54,7 @@
             }
           ],
 		"target_url": "https://redis-monitoring-telex-integration.onrender.com/format-alert",
-		"tick_url": "https://redis-monitoring-telex-integration.onrender.com/format-alert"
+		"tick_url": "https://redis-monitoring-telex-integration.onrender.com/format-alert",
+    "website": "https://redis-monitoring-telex-integration.onrender.com/"
 	}
 }

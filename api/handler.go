@@ -24,22 +24,27 @@ func HandleIncomingMessage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Printf("Received message request with settings: %+v", msgReq.Settings)
+
 	// Extract settings
 	threshold := 100 // Default threshold
 	notificationsEnabled := true
 
 	for _, setting := range msgReq.Settings {
-		switch setting.Label {
-		case "Slow Query Threshold (ms)":
-			if val, ok := setting.Default.(float64); ok {
-				threshold = int(val)
-			}
-		case "Enable Notifications":
-			if val, ok := setting.Default.(string); ok {
-				notificationsEnabled = val == "Yes"
-			}
-		}
-	}
+        log.Printf("Processing setting: %s with value: %v", setting.Label, setting.Default)
+        switch setting.Label {
+        case "Slow Query Threshold (ms)":
+            if val, ok := setting.Default.(float64); ok {
+                threshold = int(val)
+                log.Printf("Set threshold to: %d", threshold)
+            }
+        case "Enable Notifications":
+            if val, ok := setting.Default.(string); ok {
+                notificationsEnabled = val == "Yes"
+                log.Printf("Notifications enabled: %v", notificationsEnabled)
+            }
+        }
+    }
 
 	// Initialize Redis client using our database package
 	redisClient, err := database.NewRedisClient()
@@ -56,10 +61,16 @@ func HandleIncomingMessage(w http.ResponseWriter, r *http.Request) {
 
 	// Format alert message
 	formattedMessage := monitor.FormatSlowLogAlert(slowLogs, threshold)
+	log.Printf("Formatted message before notification check: %s", formattedMessage)
 
 	// Only send if notifications are enabled and there are slow queries
-	if !notificationsEnabled || formattedMessage == "No slow queries detected." {
+	if !notificationsEnabled {
+		log.Printf("Notifications disabled, returning empty message")
 		formattedMessage = ""
+	} else if formattedMessage == "No slow queries detected." {
+		log.Printf("No slow queries detected")
+		// You might want to still return this message instead of empty string
+		// formattedMessage = "No slow queries detected."
 	}
 
 	response := models.Response{
@@ -165,7 +176,7 @@ func GetIntegrationConfig() models.IntegrationConfig {
 					Label:    "Slow Query Threshold (ms)",
 					Type:     "number",
 					Required: true,
-					Default:  "100",
+					Default:  float64(100),
 				},
 			},
 			TargetURL: baseURL + "/format-alert",

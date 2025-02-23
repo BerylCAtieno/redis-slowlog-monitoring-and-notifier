@@ -36,27 +36,33 @@ The application supports custom settings:
 
 | Setting                  | Type        | Description                                      | Default Value |
 |--------------------------|------------|--------------------------------------------------|---------------|
-| Query Check Interval     | Text       | Cron expression for monitoring queries          | `0 * * * *`   |
 | Enable Notifications     | Checkbox   | Enable or disable alerts                        | `yes`         |
 | Slow Query Threshold (ms)| Number     | Redis slow query threshold in milliseconds      | `100`         |
-| Sensitivity Level        | Dropdown   | Sensitivity level (High, Medium, Low)           | `Medium`      |
-| Alert Recipients        | Multi-checkbox | Recipients for alerts                         | `Admin`       |
 
-## Example Usage
 
-```go
-msg := models.Message{
-    ChannelID: "01952e73-0caa-7bf8-b2ce-aca0f1a02acd",
-    Settings: []models.Setting{
-        {Label: "Query Check Interval", Type: "text", Default: "0 * * * *", Required: true},
-        {Label: "Enable Notifications", Type: "checkbox", Default: "yes", Required: true},
-        {Label: "Slow Query Threshold (ms)", Type: "number", Default: 100, Required: true},
-        {Label: "Sensitivity Level", Type: "dropdown", Default: "Medium", Required: false},
-        {Label: "Alert Recipients", Type: "multi-checkbox", Default: "Admin", Required: false},
-    },
-    Message: "SlowLog detected!!",
-}
-settingsProcessing(msg)
+## Test /format-message
+
+```
+curl -X POST "http://localhost:8080/format-alert" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "channel_id": "019532f7-9e79-7574-89f5-ab7c3e6fa9c2",
+       "settings": [
+         {
+           "label": "Enable Notifications",
+           "type": "checkbox",
+           "default": "Yes",
+           "required": true
+         },
+         {
+           "label": "Slow Query Threshold (ms)",
+           "type": "number",
+           "default": 100,
+           "required": true
+         }
+       ],
+       "message": "Test message"
+     }'
 ```
 
 ## License

@@ -29,6 +29,10 @@ go build -o slowlog-monitor .
 ```sh
 ./slowlog-monitor
 ```
+## Integration json
+```
+https://redis-monitoring-telex-integration.onrender.com/integration.json
+```
 
 ## Configuration
 

@@ -3,12 +3,13 @@ package api
 import (
 	"context"
 	"encoding/json"
+	"log"
 	"net/http"
 	"os"
 
+	"github.com/BerylCAtieno/redis-slowlog-monitor/database"
 	"github.com/BerylCAtieno/redis-slowlog-monitor/models"
 	"github.com/BerylCAtieno/redis-slowlog-monitor/monitor"
-	"github.com/go-redis/redis/v8"
 )
 
 func HandleIncomingMessage(w http.ResponseWriter, r *http.Request) {
@@ -40,17 +41,19 @@ func HandleIncomingMessage(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Initialize Redis client
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     os.Getenv("REDIS_ADDR"),
-		Password: os.Getenv("REDIS_PASSWORD"),
-		DB:       0,
-	})
-	defer rdb.Close()
+    // Initialize Redis client using our database package
+    redisClient, err := database.NewRedisClient()
+    if err != nil {
+        log.Printf("Failed to connect to Redis: %v", err)
+        http.Error(w, "Internal server error", http.StatusInternalServerError)
+        return
+    }
+    defer redisClient.Close()
+
 
 	// Fetch slow logs
 	ctx := context.Background()
-	slowLogs := monitor.FetchSlowLogs(ctx, rdb)
+	slowLogs := monitor.FetchSlowLogs(ctx, redisClient.Client)
 
 	// Format alert message
 	formattedMessage := monitor.FormatSlowLogAlert(slowLogs, threshold)

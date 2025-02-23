@@ -8,6 +8,7 @@ type SlowLogEntry struct {
 	Command   string `json:"command"`
 }
 
+
 // APIRequestPayload defines the structure of the /format-message POST request
 type APIRequestPayload struct {
 	ChannelID string `json:"channel_id"`

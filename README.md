@@ -47,7 +47,7 @@ The application supports custom settings:
 ## Test /format-message
 
 ```
-curl -X POST "http://localhost:8080/format-alert" \
+curl -X POST "http://https://redis-monitoring-telex-integration.onrender.com/format-alert" \
      -H "Content-Type: application/json" \
      -d '{
        "channel_id": "019532f7-9e79-7574-89f5-ab7c3e6fa9c2",

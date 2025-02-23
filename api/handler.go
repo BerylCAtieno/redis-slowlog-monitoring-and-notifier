@@ -188,9 +188,8 @@ func GetIntegrationConfig() models.IntegrationConfig {
                     Default:  "100",
                 },
             },
-            TargetURL: baseURL + "/send-alert",
-            TickURL:   baseURL + "/send-alert",
-            Website:   "https://telex.im",
+            TargetURL: baseURL + "/format-alert",
+            TickURL:   baseURL + "/format-alert",
         },
     }
 }
